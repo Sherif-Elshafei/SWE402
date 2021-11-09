@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+class TutorRate;
+
 class Salary {
     string employee, course;
     float amount;
@@ -11,6 +13,8 @@ class Salary {
     virtual string getEmployee()=0;
     virtual string getCourse()=0;
     virtual float getAmount()=0;
+    //virtual TutorRate* createMaxTwoInstances(Salary *ps, string course)=0;
+    //virtual void printcount()=0;
 };
 
 class FTRate : public Salary {
@@ -20,16 +24,19 @@ class FTRate : public Salary {
     float amount;
 
     public:
+    ~FTRate(){};
     FTRate(){}
     FTRate(string employee, string course, float amount) {
+        cout<<"in FTRate"<<endl;
         this->employee = employee;
         this->course = course;
         this->amount = amount;
     }
-    ~FTRate(){};
     string getEmployee() {return this->employee;}
     string getCourse() {return this->course;}
     float getAmount() {return this->amount;}
+    //TutorRate* createMaxTwoInstances(Salary *ps, string course){};
+    //void printcount(){};
 };
 
 class PTRate : public Salary {
@@ -46,16 +53,52 @@ class PTRate : public Salary {
 };
 
 class TutorRate : public Salary {
+    private:
     string course;
     float amount = 1000.00;
     Salary *ps;
+    TutorRate *pTR = NULL;
+    static int count;
 
-    public:
     TutorRate(Salary *ps, string course) {
+        cout<<"here"<<endl;
+        cout<<count<<endl;
         this->ps = ps;
         this->course = course;
+        TutorRate::count++;
+        cout<<count<<endl;
     }
+
+    public:
+    void printcount(){
+        cout<<count<<endl;
+    }
+
+    TutorRate* createMaxTwoInstances(Salary *ps, string course){
+        cout<<"in createmax2"<<endl;
+        this->pTR = new TutorRate(ps, course);
+        return this->pTR;
+    }
+
+    /*TutorRate* createMaxTwoInstances(Salary *ps, string course) {
+        if (pTR==NULL){
+            pTR = new TutorRate(ps, course);
+        }
+
+        else {
+            if (count<=2) {
+                pTR = new TutorRate(ps, course);
+            }
+            else {
+                cout<<"can't tutor more than two courses"<<endl;
+            }
+        }
+        return pTR;
+    }*/
+
     string getEmployee(){return ps->getEmployee();}
     string getCourse(){return ps->getCourse() + course;}
     float getAmount(){return this->amount + ps->getAmount();}
 };
+
+int TutorRate::count=0;
