@@ -13,8 +13,6 @@ class Salary {
     virtual string getEmployee()=0;
     virtual string getCourse()=0;
     virtual float getAmount()=0;
-    //virtual TutorRate* createMaxTwoInstances(Salary *ps, string course)=0;
-    //virtual void printcount()=0;
 };
 
 class FTRate : public Salary {
@@ -35,8 +33,6 @@ class FTRate : public Salary {
     string getEmployee() {return this->employee;}
     string getCourse() {return this->course;}
     float getAmount() {return this->amount;}
-    //TutorRate* createMaxTwoInstances(Salary *ps, string course){};
-    //void printcount(){};
 };
 
 class PTRate : public Salary {
@@ -61,26 +57,13 @@ class TutorRate : public Salary {
     static int count;
 
     TutorRate(Salary *ps, string course) {
-        cout<<"here"<<endl;
-        cout<<count<<endl;
         this->ps = ps;
         this->course = course;
-        TutorRate::count++;
-        cout<<count<<endl;
+        count++;
     }
 
     public:
-    void printcount(){
-        cout<<count<<endl;
-    }
-
-    TutorRate* createMaxTwoInstances(Salary *ps, string course){
-        cout<<"in createmax2"<<endl;
-        this->pTR = new TutorRate(ps, course);
-        return this->pTR;
-    }
-
-    /*TutorRate* createMaxTwoInstances(Salary *ps, string course) {
+    TutorRate* createMaxTwoInstances(Salary *ps, string course) {
         if (pTR==NULL){
             pTR = new TutorRate(ps, course);
         }
@@ -94,7 +77,7 @@ class TutorRate : public Salary {
             }
         }
         return pTR;
-    }*/
+    }
 
     string getEmployee(){return ps->getEmployee();}
     string getCourse(){return ps->getCourse() + course;}
