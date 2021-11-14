@@ -25,7 +25,6 @@ class FTRate : public Salary {
     ~FTRate(){};
     FTRate(){}
     FTRate(string employee, string course, float amount) {
-        cout<<"in FTRate"<<endl;
         this->employee = employee;
         this->course = course;
         this->amount = amount;
@@ -63,6 +62,7 @@ class TutorRate : public Salary {
     }
 
     public:
+    TutorRate(){}
     TutorRate* createMaxTwoInstances(Salary *ps, string course) {
         if (pTR==NULL){
             pTR = new TutorRate(ps, course);
