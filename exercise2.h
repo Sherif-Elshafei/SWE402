@@ -52,7 +52,7 @@ class TutorRate : public Salary {
     string course;
     float amount = 1000.00;
     Salary *ps;
-    TutorRate *pTR = NULL;
+    TutorRate *pTR = nullptr;
     static int count;
 
     TutorRate(Salary *ps, string course) {
@@ -64,13 +64,12 @@ class TutorRate : public Salary {
     public:
     TutorRate(){}
     TutorRate* createMaxTwoInstances(Salary *ps, string course) {
-        if (pTR==NULL){
-            pTR = new TutorRate(ps, course);
-        }
-
+        if (pTR==nullptr) {
+            this->pTR = new TutorRate(ps, course);
+            }
         else {
-            if (count<=2) {
-                pTR = new TutorRate(ps, course);
+            if (count<2) {
+                this->pTR = new TutorRate(ps, course);
             }
             else {
                 cout<<"can't tutor more than two courses"<<endl;
